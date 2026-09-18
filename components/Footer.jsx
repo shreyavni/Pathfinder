@@ -89,7 +89,7 @@ export default function Footer() {
       </div>
 
       <div className="text-center text-gray-500 dark:text-gray-400 text-xs mt-10">
-        © {new Date().getFullYear()} PathFinder. Built with 💡 by Edge Career.
+        © {new Date().getFullYear()} PathFinder. Built with ❤️ by Avni Shukla.
       </div>
     </footer>
   );
