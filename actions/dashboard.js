@@ -4,6 +4,7 @@ import { db } from "@/lib/prisma";
 import { requireUser } from "@/lib/auth";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { createFallbackIndustryInsights } from "@/lib/industry-insights";
+import { getIndustryInsights as getMarketInsights } from "@/lib/market-data";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
@@ -68,6 +69,9 @@ export async function getIndustryInsights() {
     throw new Error("Please complete onboarding before viewing insights");
   }
 
+  // Get real market data
+  const marketData = await getMarketInsights(currentUser.industry);
+
   // Generate missing insights and repair records created while AI data was unavailable.
   if (!currentUser.industryInsight) {
     const insights = await generateAIInsights(currentUser.industry);
@@ -80,7 +84,8 @@ export async function getIndustryInsights() {
       },
     });
 
-    return industryInsight;
+    // Merge with real market data
+    return { ...industryInsight, ...marketData };
   }
 
   if (!Array.isArray(currentUser.industryInsight.salaryRanges) || !currentUser.industryInsight.salaryRanges.length) {
@@ -91,5 +96,21 @@ export async function getIndustryInsights() {
     });
   }
 
-  return currentUser.industryInsight;
+  // Merge stored data with fresh market data
+  return { ...currentUser.industryInsight, ...marketData };
+}
+
+export async function getSalaryComparison(industry, experience) {
+  const { getSalaryPercentiles } = await import("@/lib/market-data");
+  return getSalaryPercentiles(industry, experience);
+}
+
+export async function getTechStackTrends(industry) {
+  const { getTechStackTrends } = await import("@/lib/market-data");
+  return getTechStackTrends(industry);
+}
+
+export async function getHiringVelocity(industry) {
+  const { getHiringVelocity } = await import("@/lib/market-data");
+  return getHiringVelocity(industry);
 }

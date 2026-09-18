@@ -3,8 +3,8 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
-import Script from "next/script";
 import Footer from "@/components/Footer";
+import GSAPLoader from "@/components/gsap-loader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +23,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <head>
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" strategy="beforeInteractive" />
-        <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" strategy="beforeInteractive" />
         <link rel="icon" href="/skill.png" sizes="any" />
         <meta name="description" content={metadata.description} />
         <meta
@@ -50,6 +48,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
+          <GSAPLoader />
           <Header />
           <main className="min-h-screen">{children}</main>
           <Toaster richColors />

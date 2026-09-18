@@ -51,8 +51,6 @@ cp .env.example .env.local
 Fill in your environment variables:
 ```env
 DATABASE_URL="your-postgresql-url"
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your-clerk-key"
-CLERK_SECRET_KEY="your-clerk-secret"
 GEMINI_API_KEY="your-gemini-api-key"
 ```
 

@@ -1,7 +1,13 @@
 import React from "react";
 
-const MainLayout = async ({ children }) => {
-  return <div className="container mx-auto mt-24 mb-20">{children}</div>;
+const MainLayout = ({ children }) => {
+  return (
+    <div className="min-h-screen bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10">
+        {children}
+      </div>
+    </div>
+  );
 };
 
 export default MainLayout;

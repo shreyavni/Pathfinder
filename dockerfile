@@ -15,10 +15,9 @@ ARG NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
 ARG DATABASE_URL
 
 # 4. Create a .env file from build arguments
-RUN echo "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_ZGVjZW50LXBlYWNvY2stNTguY2xlcmsuYWNjb3VudHMuZGV2JA" > .env && \
-    echo "CLERK_SECRET_KEY=sk_test_u7lK4ZGXknnxdtadxMbXyptU5RmL3xsGVDEIpMVy7x" >> .env && \
+RUN 
     echo "DATABASE_URL=postgresql://postgres:admin@localhost:5432/PathFinder?schema=public" >> .env && \
-    echo "NODE_ENV=production" >> .env
+    echo "GEMINI_API_KEY=****" >> .env
 
 # 5. Copy the rest of the application
 COPY . .
