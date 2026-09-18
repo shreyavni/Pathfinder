@@ -113,4 +113,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Built with 💡 by the PathFinder Team**
+**Built with ❤️ by the Avni Shukla**
